@@ -20,6 +20,12 @@ const UsersPage = lazy(() =>
   })),
 );
 
+const ResumeUploadPage = lazy(() =>
+  import("@/features/resume/pages/ResumeUploadPage").then((m) => ({
+    default: m.ResumeUploadPage,
+  })),
+);
+
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -45,6 +51,14 @@ export const router = createBrowserRouter([
             element: (
               <Suspense fallback={<LoadingSpinner />}>
                 <UsersPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/resume",
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ResumeUploadPage />
               </Suspense>
             ),
           },
