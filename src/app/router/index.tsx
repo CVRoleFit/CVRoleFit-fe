@@ -26,6 +26,12 @@ const ResumeUploadPage = lazy(() =>
   })),
 );
 
+const CVBuilderPage = lazy(() =>
+  import("@/features/cv/pages/CVBuilderPage").then((m) => ({
+    default: m.CVBuilderPage,
+  })),
+);
+
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -54,15 +60,23 @@ export const router = createBrowserRouter([
               </Suspense>
             ),
           },
-          {
-            path: "/resume",
-            element: (
-              <Suspense fallback={<LoadingSpinner />}>
-                <ResumeUploadPage />
-              </Suspense>
-            ),
-          },
         ],
+      },
+      {
+        path: "/resume",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ResumeUploadPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cv-builder",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <CVBuilderPage />
+          </Suspense>
+        ),
       },
       { path: "/404", element: <NotFoundPage /> },
       { path: "*", element: <Navigate to="/404" replace /> },

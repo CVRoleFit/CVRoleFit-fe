@@ -42,6 +42,12 @@ export function Header() {
           >
             Analyze Resume
           </Link>
+          <Link
+            to="/cv-builder"
+            className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+          >
+            CV Builder
+          </Link>
           {user && (
             <Link
               to="/dashboard"
