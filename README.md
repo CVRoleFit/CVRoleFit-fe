@@ -1,73 +1,125 @@
-# React + TypeScript + Vite
+# AI Resume Intelligence Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+AI Resume Intelligence Platform is an AI-powered system designed to analyze resumes and job descriptions beyond traditional keyword matching.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Instead of simply checking whether a candidate mentions specific technologies or skills, the platform focuses on understanding demonstrated capabilities through projects, experiences, and supporting evidence.
 
-## React Compiler
+The goal is to provide a more accurate and explainable way to evaluate candidate-job fit.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Problem
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Traditional Applicant Tracking Systems (ATS) primarily rely on keyword matching.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This approach introduces several challenges:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Candidates and job descriptions often use different terminology for the same skill.
+- Listed skills do not necessarily reflect actual experience or proficiency.
+- Recruiters lack visibility into how a skill was demonstrated.
+- Matching results are often difficult to explain and validate.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+As a result, qualified candidates may be overlooked despite having relevant experience and capabilities.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project Goal
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The project aims to build a Skill Intelligence layer between resumes and job descriptions.
+
+The system is designed to:
+
+- Transform resumes and job descriptions into structured data.
+- Understand skills in the context of projects and experiences.
+- Build evidence-based candidate skill profiles.
+- Compare candidate capabilities against job requirements.
+- Generate transparent and explainable matching results.
+- Highlight skill gaps and improvement opportunities.
+
+Rather than asking:
+
+> "Does the resume contain this keyword?"
+
+the system attempts to answer:
+
+> "Has the candidate demonstrated this capability through real work or projects?"
+
+---
+
+## Frontend Scope
+
+The frontend application serves as the primary interface between users and the AI-powered analysis pipeline.
+
+### Resume Analysis
+
+- Upload and process resumes.
+- Display structured resume information.
+- Visualize extracted skills, projects, experiences, and education.
+
+### Job Description Analysis
+
+- Upload and analyze job descriptions.
+- Display required skills, technologies, and responsibilities.
+
+### Candidate Skill Profile
+
+- Visualize candidate capabilities and technical skills.
+- Display supporting evidence for each skill.
+- Present confidence and strength indicators.
+
+### Resume-to-JD Matching
+
+- Compare candidate profiles against job requirements.
+- Display overall fit scores.
+- Highlight matched skills and missing requirements.
+- Surface actionable recommendations.
+
+### Explainable Reports
+
+- Show how matching decisions were made.
+- Provide evidence supporting each identified skill.
+- Improve transparency and trust in AI-generated assessments.
+
+---
+
+## Current Scope
+
+The current version focuses on:
+
+- Text-based PDF Resume Parsing
+- Text-based PDF Job Description Parsing
+- Project and Skill Analysis
+- Evidence-Based Candidate Profiling
+- Resume-to-Job Matching
+- Explainable Matching Reports
+
+---
+
+## Future Scope
+
+Planned enhancements include:
+
+- GitHub Repository Analysis
+- OCR Support for Scanned Documents
+- Multi-Agent Evaluation Pipelines
+- AWS-Based Processing Workflows
+- Career Development Recommendations
+- Interview Preparation Assistance
+
+---
+
+## Target Users
+
+- Job Seekers
+- Recruiters
+- Hiring Managers
+- Technical Interviewers
+- Career Coaches
+
+---
+
+## Vision
+
+To build an AI-powered recruitment intelligence platform that evaluates candidates based on demonstrated capabilities and supporting evidence rather than keyword presence alone, enabling more transparent, accurate, and effective hiring decisions.
