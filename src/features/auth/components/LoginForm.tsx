@@ -21,34 +21,39 @@ export function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
-          Email
-        </label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="you@example.com"
-          error={errors.email?.message}
-          {...register("email")}
-        />
-      </div>
+      <Input
+        id="email"
+        type="email"
+        label="Email"
+        placeholder="you@example.com"
+        error={errors.email?.message}
+        {...register("email")}
+      />
 
-      <div>
-        <label htmlFor="password" className="mb-1 block text-sm font-medium text-gray-700">
-          Password
+      <Input
+        id="password"
+        type="password"
+        label="Password"
+        placeholder="Enter your password"
+        error={errors.password?.message}
+        {...register("password")}
+      />
+
+      <div className="flex items-center justify-between">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span className="text-sm text-gray-600 dark:text-gray-400">Remember me</span>
         </label>
-        <Input
-          id="password"
-          type="password"
-          placeholder="••••••"
-          error={errors.password?.message}
-          {...register("password")}
-        />
+        <button type="button" className="text-sm text-blue-600 hover:underline dark:text-blue-400">
+          Forgot password?
+        </button>
       </div>
 
       {loginMutation.error && (
-        <p className="text-sm text-red-600">
+        <p className="text-sm text-red-600 dark:text-red-400">
           {loginMutation.error.message || "Login failed. Please try again."}
         </p>
       )}

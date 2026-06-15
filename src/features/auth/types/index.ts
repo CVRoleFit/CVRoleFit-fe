@@ -3,6 +3,7 @@ export interface User {
   email: string;
   name: string;
   role: "admin" | "user";
+  avatar?: string;
 }
 
 export interface AuthState {
@@ -12,6 +13,12 @@ export interface AuthState {
 }
 
 export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface SignupRequest {
+  name: string;
   email: string;
   password: string;
 }

@@ -1,11 +1,21 @@
 import api from "@/shared/api/axios";
-import type { LoginRequest, LoginResponse } from "@/features/auth/types";
+import type { LoginRequest, LoginResponse, SignupRequest } from "@/features/auth/types";
 import { loginResponseSchema } from "@/features/auth/schemas";
 import type { ApiResponse } from "@/shared/types";
 
 export const authApi = {
   login: async (data: LoginRequest): Promise<LoginResponse> => {
     const response = await api.post<ApiResponse<LoginResponse>>("/auth/login", data);
+    return loginResponseSchema.parse(response.data.data);
+  },
+
+  signup: async (data: SignupRequest): Promise<LoginResponse> => {
+    const response = await api.post<ApiResponse<LoginResponse>>("/auth/signup", data);
+    return loginResponseSchema.parse(response.data.data);
+  },
+
+  googleLogin: async (credential: string): Promise<LoginResponse> => {
+    const response = await api.post<ApiResponse<LoginResponse>>("/auth/google", { credential });
     return loginResponseSchema.parse(response.data.data);
   },
 

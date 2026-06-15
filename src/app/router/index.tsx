@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { MainLayout } from "@/app/layouts/MainLayout";
 import { AuthLayout } from "@/app/layouts/AuthLayout";
 import { ProtectedRoute } from "@/features/auth/components/ProtectedRoute";
-import { LoginPage } from "@/features/auth/pages/LoginPage";
+import { LoginPage, SignupPage } from "@/features/auth";
 import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { lazy, Suspense } from "react";
@@ -39,7 +39,10 @@ export const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       {
         element: <AuthLayout />,
-        children: [{ path: "/login", element: <LoginPage /> }],
+        children: [
+          { path: "/login", element: <LoginPage /> },
+          { path: "/signup", element: <SignupPage /> },
+        ],
       },
       {
         element: <ProtectedRoute />,
