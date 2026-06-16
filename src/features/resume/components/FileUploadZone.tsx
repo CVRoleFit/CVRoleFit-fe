@@ -104,10 +104,10 @@ export function FileUploadZone({
         onDragLeave={handleDragLeave}
         className={cn(
           "relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 transition-all cursor-pointer",
-          isDragOver && "border-blue-500 bg-blue-50",
-          !isDragOver && !disabled && "border-gray-300 hover:border-blue-400 hover:bg-gray-50",
+          isDragOver && "border-blue-500 bg-blue-50 dark:bg-blue-950/30",
+          !isDragOver && !disabled && "border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800/50 dark:hover:border-blue-500 dark:hover:bg-gray-800",
           disabled && "opacity-50 cursor-not-allowed",
-          error && "border-red-300 bg-red-50",
+          error && "border-red-300 bg-red-50 dark:border-red-700 dark:bg-red-950/30",
         )}
       >
         <input
@@ -121,9 +121,9 @@ export function FileUploadZone({
 
         {isUploading ? (
           <div className="flex flex-col items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
               <svg
-                className="h-8 w-8 animate-spin text-blue-600"
+                className="h-8 w-8 animate-spin text-blue-600 dark:text-blue-400"
                 fill="none"
                 viewBox="0 0 24 24"
               >
@@ -143,18 +143,18 @@ export function FileUploadZone({
               </svg>
             </div>
             <div className="w-full max-w-xs">
-              <div className="flex items-center justify-between text-sm text-gray-600 mb-1">
+              <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300 mb-1">
                 <span>Uploading...</span>
                 <span>{progress?.percentage ?? 0}%</span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                 <div
-                  className="h-full rounded-full bg-blue-600 transition-all duration-300"
+                  className="h-full rounded-full bg-blue-600 transition-all duration-300 dark:bg-blue-500"
                   style={{ width: `${progress?.percentage ?? 0}%` }}
                 />
               </div>
               {progress && (
-                <p className="mt-1 text-xs text-gray-500 text-center">
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 text-center">
                   {formatBytes(progress.loaded)} / {formatBytes(progress.total)}
                 </p>
               )}
@@ -162,9 +162,9 @@ export function FileUploadZone({
           </div>
         ) : (
           <>
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 mb-4">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 mb-4 dark:bg-gray-700">
               <svg
-                className="h-8 w-8 text-gray-400"
+                className="h-8 w-8 text-gray-400 dark:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -177,11 +177,11 @@ export function FileUploadZone({
                 />
               </svg>
             </div>
-            <p className="text-sm font-medium text-gray-700">
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
               Drop your resume here or{" "}
-              <span className="text-blue-600">browse</span>
+              <span className="text-blue-600 dark:text-blue-400">browse</span>
             </p>
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
               PDF files up to {(maxSize / 1024 / 1024).toFixed(0)}MB
             </p>
           </>
@@ -189,7 +189,7 @@ export function FileUploadZone({
       </div>
 
       {error && (
-        <p className="mt-2 text-sm text-red-600 text-center">{error}</p>
+        <p className="mt-2 text-sm text-red-600 dark:text-red-400 text-center">{error}</p>
       )}
     </div>
   );

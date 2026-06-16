@@ -25,7 +25,7 @@ export function Header() {
             </svg>
           </div>
           <span className="text-lg font-bold text-gray-900 dark:text-white">
-            ResumeAI
+            CVRoleFit
           </span>
         </Link>
 
@@ -40,7 +40,7 @@ export function Header() {
             to="/resume"
             className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
           >
-            Analyze Resume
+            Resume Analysis
           </Link>
           <Link
             to="/cv-builder"

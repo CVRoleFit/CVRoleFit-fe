@@ -55,13 +55,19 @@ export function ResumeUploadPage() {
   const hasAnalysis = analysis && analysis.skills.length > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      {/* Local header for this page */}
+      <header className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <Link to="/" className="text-xl font-bold text-gray-900">
-            AI Resume Intelligence
+          <Link to="/" className="text-xl font-bold text-gray-900 dark:text-white">
+            CVRoleFit
           </Link>
           <nav className="flex items-center gap-4">
+            <Link to="/cv-builder">
+              <Button variant="secondary" size="sm">
+                CV Builder
+              </Button>
+            </Link>
             <Link to="/dashboard">
               <Button variant="ghost" size="sm">
                 Dashboard
@@ -73,8 +79,8 @@ export function ResumeUploadPage() {
 
       <main className="mx-auto max-w-6xl px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Resume ATS Analysis</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Resume ATS Analysis</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
             Upload your resume (PDF) and get AI-powered insights about your skills,
             projects, and experience.
           </p>
@@ -82,8 +88,9 @@ export function ResumeUploadPage() {
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-1">
-            <div className="rounded-xl border border-gray-200 bg-white p-6">
-              <h2 className="mb-4 text-lg font-semibold text-gray-900">Upload Resume</h2>
+            {/* Upload Card */}
+            <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+              <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Upload Resume</h2>
               <FileUploadZone
                 onFileSelect={handleFileSelect}
                 isUploading={uploadMutation.isPending}
@@ -91,10 +98,10 @@ export function ResumeUploadPage() {
               />
 
               {uploadedResume && (
-                <div className="mt-4 rounded-lg bg-green-50 p-4 border border-green-200">
+                <div className="mt-4 rounded-lg bg-green-50 p-4 border border-green-200 dark:border-green-800 dark:bg-green-950/30">
                   <div className="flex items-center gap-2">
                     <svg
-                      className="h-5 w-5 text-green-600"
+                      className="h-5 w-5 text-green-600 dark:text-green-400"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -106,11 +113,11 @@ export function ResumeUploadPage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="text-sm font-medium text-green-800">
+                    <span className="text-sm font-medium text-green-800 dark:text-green-300">
                       {uploadedResume.filename}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-green-600">
+                  <p className="mt-1 text-xs text-green-600 dark:text-green-400">
                     Status: {uploadedResume.status}
                   </p>
                   {uploadedResume.status === "completed" && !hasAnalysis && (
@@ -127,23 +134,24 @@ export function ResumeUploadPage() {
               )}
             </div>
 
-            <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6">
-              <h2 className="mb-3 text-lg font-semibold text-gray-900">How It Works</h2>
-              <ol className="space-y-3 text-sm text-gray-600">
+            {/* How It Works Card */}
+            <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+              <h2 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">How It Works</h2>
+              <ol className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
                 <li className="flex gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
                     1
                   </span>
                   <span>Upload your resume (PDF format)</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
                     2
                   </span>
                   <span>AI extracts and analyzes content</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
                     3
                   </span>
                   <span>View skills, projects, and evidence</span>
@@ -154,10 +162,10 @@ export function ResumeUploadPage() {
 
           <div className="lg:col-span-2">
             {isLoading ? (
-              <div className="flex h-64 items-center justify-center rounded-xl border border-gray-200 bg-white">
+              <div className="flex h-64 items-center justify-center rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
                 <div className="text-center">
-                  <div className="h-12 w-12 mx-auto animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
-                  <p className="mt-4 text-sm text-gray-600">
+                  <div className="h-12 w-12 mx-auto animate-spin rounded-full border-4 border-blue-200 border-t-blue-600 dark:border-blue-800 dark:border-t-blue-400" />
+                  <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
                     {uploadMutation.isPending
                       ? "Uploading resume..."
                       : "Analyzing resume content..."}
@@ -166,22 +174,23 @@ export function ResumeUploadPage() {
               </div>
             ) : hasAnalysis ? (
               <div className="space-y-6">
-                <div className="rounded-xl border border-gray-200 bg-white p-6">
+                {/* Analysis Summary Card */}
+                <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-gray-900">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Analysis Complete
                     </h2>
                     {analysis.confidenceScore && (
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-500">Confidence Score</span>
-                        <span className="text-lg font-bold text-blue-600">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Confidence Score</span>
+                        <span className="text-lg font-bold text-blue-600 dark:text-blue-400">
                           {Math.round(analysis.confidenceScore * 100)}%
                         </span>
                       </div>
                     )}
                   </div>
                   {analysis.summary && (
-                    <p className="mt-3 text-gray-600">{analysis.summary}</p>
+                    <p className="mt-3 text-gray-600 dark:text-gray-300">{analysis.summary}</p>
                   )}
                 </div>
 
@@ -196,10 +205,10 @@ export function ResumeUploadPage() {
                 <EducationCard education={analysis.education} />
               </div>
             ) : (
-              <div className="flex h-64 items-center justify-center rounded-xl border border-gray-200 bg-white">
+              <div className="flex h-64 items-center justify-center rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
                 <div className="text-center">
                   <svg
-                    className="mx-auto h-12 w-12 text-gray-300"
+                    className="mx-auto h-12 w-12 text-gray-300 dark:text-gray-600"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -211,7 +220,7 @@ export function ResumeUploadPage() {
                       d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                     />
                   </svg>
-                  <p className="mt-2 text-gray-500">
+                  <p className="mt-2 text-gray-500 dark:text-gray-400">
                     Upload a resume to see AI-powered analysis
                   </p>
                 </div>

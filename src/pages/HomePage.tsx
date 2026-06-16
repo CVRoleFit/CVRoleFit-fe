@@ -254,7 +254,7 @@ export function HomePage() {
               See the Difference
             </h2>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              Traditional ATS vs. ResumeAI
+              Traditional ATS vs. CVRoleFit
             </p>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
@@ -279,7 +279,7 @@ export function HomePage() {
             </div>
             <div className="rounded-xl border border-green-200 bg-green-50 p-6 dark:border-green-900/50 dark:bg-green-950/20">
               <h3 className="text-lg font-semibold text-green-800 dark:text-green-300">
-                ResumeAI Understands:
+                CVRoleFit Understands:
               </h3>
               <ul className="mt-4 space-y-2">
                 <li className="flex items-start gap-2 text-sm text-green-600 dark:text-green-400">

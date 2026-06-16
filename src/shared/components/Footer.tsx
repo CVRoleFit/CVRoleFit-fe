@@ -25,12 +25,11 @@ export function Footer() {
                 </svg>
               </div>
               <span className="text-lg font-bold text-gray-900 dark:text-white">
-                ResumeAI
+                CVRoleFit
               </span>
             </Link>
             <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-              AI-powered resume analysis that goes beyond keyword matching to
-              understand your demonstrated capabilities.
+              AI-powered resume analysis that matches your skills to the perfect roles. Go beyond keyword matching.
             </p>
           </div>
 
@@ -125,7 +124,7 @@ export function Footer() {
 
         <div className="mt-8 border-t border-gray-200 pt-6 dark:border-gray-800">
           <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-            © {currentYear} ResumeAI. All rights reserved.
+            © {currentYear} CVRoleFit. All rights reserved.
           </p>
         </div>
       </div>
