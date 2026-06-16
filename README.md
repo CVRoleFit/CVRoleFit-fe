@@ -1,8 +1,8 @@
 # AI Resume Intelligence Platform
-
+# PROJECT NAME: CVRoleFit
 ## Overview
 
-AI Resume Intelligence Platform is an AI-powered system designed to analyze resumes and job descriptions beyond traditional keyword matching.
+CVRoleFit Intelligence Platform is an AI-powered system designed to analyze resumes and job descriptions beyond traditional keyword matching.
 
 Instead of simply checking whether a candidate mentions specific technologies or skills, the platform focuses on understanding demonstrated capabilities through projects, experiences, and supporting evidence.
 
