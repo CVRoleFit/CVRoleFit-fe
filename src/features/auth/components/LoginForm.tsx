@@ -23,9 +23,9 @@ export function LoginForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Input
         id="email"
-        type="email"
-        label="Email"
-        placeholder="you@example.com"
+        type="text"
+        label="Username"
+        placeholder="user or admin"
         error={errors.email?.message}
         {...register("email")}
       />

@@ -110,6 +110,15 @@ export function LoginPage() {
               </p>
             </div>
 
+            {/* Demo Credentials Info */}
+            <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/30">
+              <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">Demo Credentials</p>
+              <div className="text-xs text-blue-700 dark:text-blue-400 space-y-1">
+                <p><strong>User:</strong> username: <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded">user</code> / password: <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded">user</code></p>
+                <p><strong>Admin:</strong> username: <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded">admin</code> / password: <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded">admin</code></p>
+              </div>
+            </div>
+
             {/* Google Sign In Button */}
             <Button
               type="button"
