@@ -5,3 +5,4 @@ export { LoadingSpinner } from "./LoadingSpinner";
 export { ThemeToggle } from "./ThemeToggle";
 export { Header } from "./Header";
 export { Footer } from "./Footer";
+export { FloatingIcons } from "./FloatingIcons";
