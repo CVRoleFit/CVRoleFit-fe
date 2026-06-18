@@ -115,7 +115,6 @@ export function FloatingIcons() {
             duration: item.duration,
             delay: item.delay,
             repeat: Infinity,
-            ease: "easeInOut",
           }}
         >
           <div style={{ fontSize: `${item.size}px` }}>{item.icon}</div>

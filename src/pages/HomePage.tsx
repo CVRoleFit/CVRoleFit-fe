@@ -102,7 +102,6 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
     },
   },
 };
@@ -124,7 +123,6 @@ const slideUpVariants = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut",
     },
   },
 };
@@ -187,7 +185,6 @@ export function HomePage() {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
                 }}
               >
                 Understands
@@ -391,7 +388,6 @@ export function HomePage() {
                       duration: 2,
                       repeat: Infinity,
                       delay: idx * 0.3,
-                      ease: "easeInOut",
                     }}
                   >
                     {step.step}
