@@ -7,9 +7,12 @@ import {
   SkillsSection,
   ProjectsSection,
   CVPreview,
+  LatexExportPanel,
 } from "@/features/cv/components";
 import { Button } from "@/shared/components";
 import type { CVSection } from "@/features/cv/types";
+
+type ViewMode = "edit" | "preview" | "latex";
 
 const sections: { id: CVSection; label: string }[] = [
   { id: "personal", label: "Personal Info" },
@@ -40,7 +43,7 @@ export function CVBuilderPage() {
   } = useCVStore();
 
   const { generateContent, isGenerating, error, clearError } = useAIAssist();
-  const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
+  const [viewMode, setViewMode] = useState<ViewMode>("edit");
   const [aiTarget, setAITarget] = useState<string | null>(null);
 
   const handleAIAssistPersonal = useCallback(
@@ -57,17 +60,31 @@ export function CVBuilderPage() {
   );
 
   const handleAIAssistExperience = useCallback(
-    async (type: "description" | "achievement", context: string, experienceId: string) => {
+    async (
+      type: "description" | "achievement",
+      context: string,
+      experienceId: string,
+    ) => {
       setAITarget(experienceId);
-      const content = await generateContent({ context, type: type === "description" ? "experience" : "achievement" });
+      const content = await generateContent({
+        context,
+        type: type === "description" ? "experience" : "achievement",
+      });
       if (content) {
         const exp = cv.experiences.find((e) => e.id === experienceId);
         if (exp) {
           if (type === "description") {
-            const achievements = content.split("\n").filter((line) => line.trim().startsWith("-") || line.trim().startsWith("•"));
+            const achievements = content
+              .split("\n")
+              .filter(
+                (line) =>
+                  line.trim().startsWith("-") || line.trim().startsWith("•"),
+              );
             if (achievements.length > 0) {
               updateExperience(experienceId, {
-                achievements: achievements.map((a) => a.replace(/^[-•]\s*/, "").trim()),
+                achievements: achievements.map((a) =>
+                  a.replace(/^[-•]\s*/, "").trim(),
+                ),
               });
             }
           }
@@ -81,9 +98,15 @@ export function CVBuilderPage() {
   const handleAIAssistSkills = useCallback(
     async (context: string) => {
       setAITarget("skills");
-      const content = await generateContent({ context: context || "software developer", type: "skills" });
+      const content = await generateContent({
+        context: context || "software developer",
+        type: "skills",
+      });
       if (content) {
-        const skillNames = content.split(",").map((s) => s.trim()).filter(Boolean);
+        const skillNames = content
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
         skillNames.forEach((name) => {
           addSkill({ name, level: "intermediate" });
         });
@@ -127,41 +150,42 @@ export function CVBuilderPage() {
       {/* Header */}
       <div className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">CV Builder</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Create your perfect resume with AI assistance</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                CV Builder
+              </h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Create your perfect resume with AI assistance
+              </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button variant="secondary" size="sm" onClick={handleExportJSON}>
                 Export JSON
               </Button>
               <Button size="sm" onClick={handlePrint}>
                 Print / PDF
               </Button>
-              <div className="ml-4 flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("edit")}
-                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
-                    viewMode === "edit"
-                      ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white"
-                      : "text-gray-500 dark:text-gray-400"
-                  }`}
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("preview")}
-                  className={`rounded-md px-3 py-1.5 text-sm font-medium transition-all ${
-                    viewMode === "preview"
-                      ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white"
-                      : "text-gray-500 dark:text-gray-400"
-                  }`}
-                >
-                  Preview
-                </button>
+              <div
+                className="ml-0 flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800 sm:ml-4"
+                role="group"
+                aria-label="CV builder view"
+              >
+                {(["edit", "preview", "latex"] as const).map((mode) => (
+                  <button
+                    key={mode}
+                    type="button"
+                    aria-pressed={viewMode === mode}
+                    onClick={() => setViewMode(mode)}
+                    className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize transition-all ${
+                      viewMode === mode
+                        ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-white"
+                        : "text-gray-500 dark:text-gray-400"
+                    }`}
+                  >
+                    {mode === "latex" ? "LaTeX" : mode}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -173,7 +197,10 @@ export function CVBuilderPage() {
         <div className="fixed bottom-4 right-4 z-50 rounded-lg border border-red-200 bg-red-50 p-4 shadow-lg dark:border-red-800 dark:bg-red-950">
           <div className="flex items-start gap-3">
             <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
-            <button onClick={clearError} className="text-red-500 hover:text-red-700">
+            <button
+              onClick={clearError}
+              className="text-red-500 hover:text-red-700"
+            >
               ×
             </button>
           </div>
@@ -188,7 +215,9 @@ export function CVBuilderPage() {
             <div className="lg:col-span-3">
               <div className="sticky top-20 space-y-4">
                 <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Resume Title</label>
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Resume Title
+                  </label>
                   <input
                     type="text"
                     value={cv.title}
@@ -216,13 +245,24 @@ export function CVBuilderPage() {
 
                 <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 dark:border-purple-800 dark:bg-purple-950/50">
                   <div className="flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-400">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
+                      />
                     </svg>
                     AI Assistance
                   </div>
                   <p className="mt-2 text-xs text-purple-600 dark:text-purple-400">
-                    Click "AI Assist" buttons throughout the form to generate content with AI.
+                    Click "AI Assist" buttons throughout the form to generate
+                    content with AI.
                   </p>
                 </div>
               </div>
@@ -230,7 +270,9 @@ export function CVBuilderPage() {
           )}
 
           {/* Editor / Preview */}
-          <div className={viewMode === "edit" ? "lg:col-span-5" : "lg:col-span-12"}>
+          <div
+            className={viewMode === "edit" ? "lg:col-span-5" : "lg:col-span-12"}
+          >
             {viewMode === "edit" ? (
               <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
                 {activeSection === "personal" && (
@@ -281,10 +323,12 @@ export function CVBuilderPage() {
                   />
                 )}
               </div>
-            ) : (
+            ) : viewMode === "preview" ? (
               <div className="print:shadow-none mx-auto max-w-3xl">
                 <CVPreview cv={cv} />
               </div>
+            ) : (
+              <LatexExportPanel cv={cv} />
             )}
           </div>
 
@@ -292,7 +336,9 @@ export function CVBuilderPage() {
           {viewMode === "edit" && (
             <div className="lg:col-span-4">
               <div className="sticky top-20">
-                <h3 className="mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">Live Preview</h3>
+                <h3 className="mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Live Preview
+                </h3>
                 <div className="max-h-[calc(100vh-120px)] overflow-y-auto rounded-xl">
                   <CVPreview cv={cv} />
                 </div>
